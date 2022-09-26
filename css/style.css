@@ -109,12 +109,14 @@ nav {
   padding-right: 0.5rem;
 }
 .log-out {
+  position: relative;
+  bottom: 2px;
   background-image: url(/img/right-from-bracket-solid.svg);
   background-repeat: no-repeat;
   background-size: cover;
-  width: 25px;
-  height: 25px;
-  margin-left: 1rem;
+  width: 20px;
+  height: 20px;
+  margin-left: 0.7rem;
   cursor: pointer;
 }
 .log-out:hover {
@@ -412,8 +414,8 @@ figure {
     bottom: 64%;
   }
   .log-out {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
   .news-big-category {
     padding: 5px;
