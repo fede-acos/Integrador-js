@@ -27,7 +27,6 @@ btn.addEventListener("click", () => {
 });
 
 form.addEventListener("submit", (e) => {
-  console.log(password.value);
   if (!checkPassword()) {
     errorMsg.innerText = "Wrong password, try again.";
     errorMsg.dataset.visible = "true";

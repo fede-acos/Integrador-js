@@ -72,7 +72,6 @@ function navFixedOnScroll() {
 
 function checkIfLoggedIn() {
   const currentUser = loadCurrentUser();
-  console.log(currentUser);
   if (currentUser.length < 1 || undefined) return;
   loginContainer.innerHTML = "";
   const userMsg = document.createElement("span");
@@ -131,7 +130,6 @@ async function filterResponseFromApi(section = "world", reload) {
   const sideArticles = newsWithImages.splice(1, 3);
   renderSideArticles(sideArticles);
   renderBottomArticles(true);
-  console.log(newsWithImages);
 }
 
 function filterMainArticleImg() {
