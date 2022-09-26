@@ -1,0 +1,531 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+:root {
+  --clr-accent-grey: #f0f0f0;
+  --clr-accent-black: rgb(33, 34, 38);
+  --clr-accent-red: #0274b6;
+  --clr-title-black: #191919;
+  --clr-accent-blue: #0274b6;
+  --clr-accent-white: hsla(0, 0%, 100%, 1);
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  --fs-title-big: 45px;
+  --fs-abstract: 20px;
+
+  --fs-category-small: 12px;
+  --fs-small-title: 24px;
+  --fs-mobile-big-title: 32px;
+}
+
+/* // https://piccalil.li/blog/a-modern-css-reset */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"],
+li {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  background-color: var(--clr-accent-grey);
+}
+nav {
+  position: relative;
+  max-height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0.12rem 0.18rem;
+}
+.nav-container {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  z-index: 100;
+}
+
+.login-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 5%;
+  bottom: 63%;
+  background-color: white;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: var(--fs-category-small);
+}
+.register {
+  padding-left: 0.5rem;
+  border-left: solid 1px #ccc;
+}
+.sign-in {
+  padding-right: 0.5rem;
+}
+.log-out {
+  background-image: url(/random/img/right-from-bracket-solid.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 25px;
+  height: 25px;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+.log-out:hover {
+  transform: scale(1.05);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.logo-container > a {
+  display: block;
+  max-width: 70%;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: var(--fw-bold);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  justify-content: center;
+  color: var(--clr-title-black);
+  font-size: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+.nav-links li {
+  list-style: none;
+}
+.nav-links a {
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 50% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s;
+}
+
+li a:hover,
+li a:focus,
+li a:active {
+  color: var(--clr-accent-blue);
+  background-size: 70% 2px;
+}
+
+.main-section {
+  position: relative;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+}
+.columns-container {
+  max-width: 90%;
+  display: grid;
+  justify-items: center;
+
+  grid-template-columns: 70% auto;
+  gap: 1rem;
+}
+
+.main-section::after {
+  position: absolute;
+  content: "";
+  width: 90%;
+  height: 1px;
+  background-color: #ccc;
+  bottom: -3%;
+  left: 5%;
+}
+
+.news-card-small {
+  margin-bottom: 1rem;
+}
+
+figure {
+  position: relative;
+}
+
+.news-title-big {
+  font-family: "Abril Fatface", cursive;
+  color: var(--clr-title-black);
+  font-weight: var(--fw-regular);
+  text-align: left;
+  font-size: var(--fs-title-big);
+  cursor: pointer;
+}
+.news-big-category {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  font-weight: var(--fw-bold);
+  text-align: center;
+  color: var(--clr-accent-white);
+  background-color: var(--clr-accent-blue);
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.news-small-category {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 5px;
+  font-size: var(--fs-category-small);
+  font-weight: var(--fw-bold);
+  font-family: "Josefin Sans", sans-serif;
+
+  text-align: center;
+  color: var(--clr-accent-white);
+  background-color: var(--clr-accent-blue);
+}
+.news-abstract {
+  margin-top: 2rem;
+  font-family: "Josefin Sans", sans-serif;
+  text-align: left;
+  font-size: var(--fs-abstract);
+}
+.news-title-small {
+  font-family: "Abril Fatface", cursive;
+  text-align: left;
+  font-size: var(--fs-small-title);
+  cursor: pointer;
+}
+.news-title-small:hover,
+.news-title-big:hover,
+.latest-title-small:hover {
+  text-decoration: underline;
+}
+.top-news-section {
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+.latest-section {
+  display: flex;
+  justify-content: center;
+}
+
+.latest-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  margin-top: 5rem;
+}
+
+.latest-card-small {
+  display: flex;
+  margin-top: 2rem;
+}
+.latest-card-small > img {
+  margin-right: 1rem;
+  max-width: 400px;
+}
+.latest-category {
+  font-family: "Josefin Sans", sans-serif;
+  max-width: fit-content;
+  padding: 4px;
+  text-align: center;
+  color: var(--clr-accent-white);
+  background-color: var(--clr-accent-blue);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-category-small);
+}
+.latest-title-small {
+  font-family: "Abril Fatface", cursive;
+  font-size: var(--fs-small-title);
+  cursor: pointer;
+}
+.latest-abstract {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: var(--fs-abstract);
+  font-weight: 500;
+}
+.title-category {
+  font-family: "Josefin Sans", sans-serif;
+  padding: 5px;
+  font-size: 1rem;
+  max-width: fit-content;
+  font-weight: var(--fw-medium);
+  text-align: left;
+  font-weight: var(--fw-bold);
+  color: var(--clr-accent-white);
+  background-color: var(--clr-accent-blue);
+}
+
+.btn-container {
+  margin: 8px;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#load-more {
+  width: fit-content;
+  padding: 16px;
+  color: white;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+
+  letter-spacing: 0.15rem;
+}
+
+#load-more:not([disabled]):hover {
+  opacity: 0.9;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+
+#load-more[disabled] {
+  background-color: grey !important;
+}
+
+/* 80 25 */
+
+@media (min-width: 1900px) {
+  .logo-container > a {
+    max-width: 80%;
+  }
+  .nav-links,
+  .title-category,
+  .login-container {
+    font-size: 1.3rem;
+  }
+  .news-title-big {
+    font-size: 55px;
+  }
+  .news-abstract,
+  .latest-abstract {
+    font-size: 24px;
+  }
+  .latest-title-small {
+    font-size: 34px;
+  }
+  .news-title-small {
+    font-size: 30px;
+  }
+
+  .latest-card-small > img {
+    max-width: 550px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .latest-abstract {
+    font-size: 15px;
+  }
+
+  .columns-container,
+  .latest-container {
+    max-width: 99%;
+  }
+  .login-container {
+    right: 1%;
+  }
+}
+@media (max-width: 900px) {
+  .logo-container > a {
+    max-width: 60%;
+  }
+  .nav-links {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 765px) {
+  .nav-container {
+    position: absolute;
+  }
+  .nav-container[data-sticky="true"] {
+    top: 0;
+    position: fixed;
+  }
+  .main-section {
+    padding-top: 25%;
+  }
+
+  .login-container {
+    font-size: 14px;
+    z-index: 99;
+    background-color: var(--clr-accent-grey);
+    bottom: 64%;
+  }
+  .log-out {
+    width: 20px;
+    height: 20px;
+  }
+  .news-big-category {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .news-title-big {
+    font-size: var(--fs-mobile-big-title);
+  }
+
+  .columns-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .left-main-column {
+    position: relative;
+    margin-bottom: 5rem;
+  }
+
+  .left-main-column::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    bottom: -13%;
+  }
+
+  .latest-card-small {
+    display: flex;
+    flex-direction: column;
+  }
+  .latest-card-small > img {
+    max-width: 100%;
+  }
+  .latest-category,
+  .latest-abstract {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: grid;
+    grid-template-columns: auto;
+    place-items: center;
+    position: absolute;
+    height: 26px;
+    width: 32px;
+    bottom: 35%;
+    left: 3%;
+    z-index: 9999;
+    cursor: pointer;
+  }
+  .mobile-nav-toggle > div {
+    min-height: 3.5px;
+    min-width: 24px;
+    border-radius: 10px;
+    background: var(--clr-title-black);
+  }
+
+  .nav-links {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: inherit;
+    text-align: left;
+    margin-left: 1rem;
+    padding-top: 22%;
+  }
+
+  .nav-sub {
+    position: relative;
+    transform: translateY(-100%);
+    position: fixed;
+    display: block;
+
+    width: 100vw;
+    background-color: var(--clr-accent-grey);
+    z-index: 90;
+    transition: transform 0.5s ease-in-out;
+  }
+  .nav-sub[data-visible="true"] {
+    transform: translateY(0);
+  }
+
+  .mobile-nav-toggle div:nth-child(1) {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .mobile-nav-toggle div:nth-child(2) {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .mobile-nav-toggle div:nth-child(3) {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .mobile-nav-toggle[data-visible="true"] div:nth-child(1) {
+    transform: rotate(50deg);
+  }
+
+  .mobile-nav-toggle[data-visible="true"] div:nth-child(2) {
+    transform: scaleY(0);
+  }
+
+  .mobile-nav-toggle[data-visible="true"] div:nth-child(3) {
+    transform: rotate(-50deg);
+  }
+}
+@media (max-width: 500px) {
+  .login-container {
+    bottom: 69%;
+  }
+}

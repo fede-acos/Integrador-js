@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The News Times</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="main.js" type="module"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-container" data-sticky="false">
+          <div class="mobile-nav-toggle" data-visible="false">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="logo-container">
+            <a href="#"> <img src="./img/The-News-Times-3.svg" alt="logo" /></a>
+          </div>
+        </div>
+
+        <div class="nav-sub" data-visible="false">
+          <ul class="nav-links">
+            <li><a data-section="world" href="#">World</a></li>
+            <li><a data-section="politics" href="#">Politics</a></li>
+            <li><a data-section="business" href="#">Business</a></li>
+            <li><a data-section="technology" href="#">Technology</a></li>
+            <li><a data-section="science" href="#">Science</a></li>
+            <li><a data-section="sports" href="#">Sports</a></li>
+            <li><a data-section="movies" href="#">Movies</a></li>
+          </ul>
+          <div class="login-container">
+            <li class="sign-in"><a href="./login.html">Sign In</a></li>
+            <li class="register"><a href="./signup.html">Register</a></li>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section class="main-section">
+      <div class="columns-container">
+        <div class="left-main-column"></div>
+        <div class="right-main-column">
+          <h1 class="top-news-section title-category">Top News</h1>
+
+          <div id="top-news-container"></div>
+        </div>
+      </div>
+    </section>
+    <div class="background">
+      <section class="latest-section">
+        <div class="latest-container">
+          <h1 class="title-latest title-category">Related News</h1>
+
+          <div class="article-container"></div>
+        </div>
+      </section>
+
+      <div class="btn-container">
+        <button id="load-more">Load more</button>
+      </div>
+
+      <template id="news-card-small-template">
+        <article data-news-id class="news-card-small">
+          <figure>
+            <img data-news-img-small />
+            <div data-news-category class="news-small-category"></div>
+          </figure>
+          <div class="news-title-small"><a data-news-title></a></div>
+        </article>
+      </template>
+
+      <template id="news-card-big-template">
+        <article data-newsId class="news-card-big">
+          <figure>
+            <div class="news-title-big"><a data-news-title></a></div>
+            <img class="news-img" data-news-img-big />
+            <div data-news-category class="news-big-category">Test</div>
+          </figure>
+
+          <div data-news-abstract class="news-abstract"></div>
+        </article>
+      </template>
+
+      <template id="latest-template">
+        <article data-card class="latest-card-small">
+          <img data-news-img-small />
+          <div data-news-info class="latest-info">
+            <div data-news-category class="latest-category"></div>
+            <div class="latest-title-small"><a data-news-title></a></div>
+
+            <div data-news-abstract class="latest-abstract"></div>
+          </div>
+        </article>
+      </template>
+    </div>
+  </body>
+</html>

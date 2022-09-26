@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/logStyle.css" />
+    <script src="login.js" defer></script>
+    <title>Log in</title>
+  </head>
+  <body>
+    <nav>
+      <div class="logo-container">
+        <a href="./index.html">
+          <img src="./img/The-News-Times-3.svg" alt="logo"
+        /></a>
+      </div>
+    </nav>
+    <div class="login-container">
+      <div class="login-wrap">
+        <h1>Log In</h1>
+        <form id="form" action="index.html">
+          <label class="form-label">Email Address</label>
+          <input
+            data-error="false"
+            type="email"
+            id="email"
+            class="form-text-input"
+          />
+          <div class="password-container" data-visible="false">
+            <label class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-text-input"
+              required
+            />
+          </div>
+          <p class="error-description" data-visible="false">placeholder text</p>
+
+          <input type="submit" value="Continue" class="btn continue-btn" />
+        </form>
+        <div class="subscribe-container">
+          <h2>Don’t have an account?</h2>
+          <button
+            class="subscribe-btn btn"
+            onclick="location.href ='signup.html' "
+          >
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
