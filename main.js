@@ -20,14 +20,12 @@ const loginContainer = document.querySelector(".login-container");
 const RELATED_NEWS_AMOUNT = 5;
 
 let newsWithImages = [];
-let fullNewsList = [];
+
+startPage();
 
 window.onscroll = function () {
   navFixedOnScroll();
 };
-
-checkIfLoggedIn();
-filterResponseFromApi();
 
 navBtn.addEventListener("click", () => {
   if (navBtn.getAttribute("data-visible") === "false") {
@@ -42,7 +40,7 @@ navBtn.addEventListener("click", () => {
 navBar.addEventListener("click", (e) => {
   if (e.target.hasAttribute("data-section")) {
     const section = e.target.getAttribute("data-section");
-    filterResponseFromApi(section, true);
+    filterUnwantedNews(section, true);
     /*     getLatestFromApi(section);
      */
   }
@@ -70,18 +68,32 @@ function navFixedOnScroll() {
   }
 }
 
+function startPage() {
+  checkIfLoggedIn();
+  filterUnwantedNews();
+  if (checkIfLoggedIn()) {
+    greetLoggedUser(checkIfLoggedIn());
+    createLogOutBtn();
+  }
+}
+
 function checkIfLoggedIn() {
   const currentUser = loadCurrentUser();
-  if (currentUser.length < 1 || undefined) return;
+  if (!(currentUser.length < 1 || undefined)) return currentUser;
+}
+
+function greetLoggedUser(currentUser) {
   loginContainer.innerHTML = "";
   const userMsg = document.createElement("span");
+  userMsg.innerText = `Hello, ${currentUser.name}`;
+  loginContainer.appendChild(userMsg);
+}
+function createLogOutBtn() {
   const logOut = document.createElement("span");
   logOut.classList.add("log-out");
   logOut.onclick = function () {
     logOutUser();
   };
-  userMsg.innerText = `Hello, ${currentUser.name}`;
-  loginContainer.appendChild(userMsg);
   loginContainer.appendChild(logOut);
 }
 
@@ -100,7 +112,7 @@ function checkIfNewsIsCache(section) {
   if (myData.length > 1) return true;
 }
 
-async function getNewsFromApi(section) {
+async function getNewsFromApiOrStorage(section) {
   if (!checkIfNewsIsCache(section)) {
     const response = await fetch(
       `${BASE_URL_TOP_STORIES}/${section}.json?${API_KEY}`
@@ -119,17 +131,19 @@ async function getNewsFromApi(section) {
   }
 }
 
-async function filterResponseFromApi(section = "world", reload) {
-  const news = await getNewsFromApi(section);
+async function filterUnwantedNews(section = "world", reload) {
+  const news = await getNewsFromApiOrStorage(section);
   newsWithImages = news.filter(
     (news) => news.multimedia != null && news.title != "" && news.abstract != ""
   );
-
-  fullNewsList = [...newsWithImages];
+  renderNews(reload);
+  /*   renderMainArticle();
+  renderBottomArticles(true); */
+}
+function renderNews(reload) {
+  renderBottomArticles(reload);
   renderMainArticle();
-  const sideArticles = newsWithImages.splice(1, 3);
-  renderSideArticles(sideArticles);
-  renderBottomArticles(true);
+  renderSideArticles();
 }
 
 function filterMainArticleImg() {
@@ -172,51 +186,10 @@ function renderMainArticle(mainArticle) {
 
   itemContainer.appendChild(newsItem);
 }
-
-function renderSideArticles(sideArticles) {
-  const itemContainer = rightContainer;
-  itemContainer.innerHTML = "";
-
-  sideArticles.forEach((news, index) => {
-    const newsItem = smallTemplate.content.cloneNode(true);
-
-    const container = newsItem.querySelector("[data-news-id]");
-    container.dataset.newsid = index;
-
-    const newsItemImg = newsItem.querySelector("[data-news-img-small]");
-    newsItemImg.src = news.multimedia[1].url;
-
-    const newsItemCategory = newsItem.querySelector("[data-news-category]");
-    newsItemCategory.dataset.newsCategory = news.section;
-    newsItemCategory.innerText = news.section.toUpperCase();
-
-    const newsItemTitle = newsItem.querySelector("[data-news-title]");
-    newsItemTitle.innerText = news.title;
-    newsItemTitle.href = news.url;
-
-    itemContainer.appendChild(newsItem);
-  });
-}
-
-function checkIfCanLoadNews(reload) {
-  if (newsWithImages.length < RELATED_NEWS_AMOUNT) {
-    loadMoreButton.setAttribute("disabled", true);
-    loadMoreButton.disable = true;
-    return false;
-  } else if (reload) {
-    const itemContainer = latestContainer;
-    itemContainer.innerHTML = "";
-    loadMoreButton.removeAttribute("disabled");
-
-    return true;
-  }
-  loadMoreButton.removeAttribute("disabled");
-
-  return true;
-}
-
 function renderBottomArticles(reload) {
-  if (!checkIfCanLoadNews(reload)) return;
+  if (!checkIfCanLoadMoreNews()) return;
+
+  removeUnrelatedNews(reload);
 
   const itemContainer = latestContainer;
 
@@ -243,4 +216,51 @@ function renderBottomArticles(reload) {
     newsItemAbstract.innerText = news.abstract;
     itemContainer.appendChild(newsItem);
   });
+}
+
+function renderSideArticles() {
+  const sideArticles = newsWithImages.splice(1, 3);
+
+  const itemContainer = rightContainer;
+  itemContainer.innerHTML = "";
+
+  sideArticles.forEach((news, index) => {
+    const newsItem = smallTemplate.content.cloneNode(true);
+
+    const container = newsItem.querySelector("[data-news-id]");
+    container.dataset.newsid = index;
+
+    const newsItemImg = newsItem.querySelector("[data-news-img-small]");
+    newsItemImg.src = news.multimedia[1].url;
+
+    const newsItemCategory = newsItem.querySelector("[data-news-category]");
+    newsItemCategory.dataset.newsCategory = news.section;
+    newsItemCategory.innerText = news.section.toUpperCase();
+
+    const newsItemTitle = newsItem.querySelector("[data-news-title]");
+    newsItemTitle.innerText = news.title;
+    newsItemTitle.href = news.url;
+
+    itemContainer.appendChild(newsItem);
+  });
+}
+
+function checkIfCanLoadMoreNews() {
+  if (newsWithImages.length < RELATED_NEWS_AMOUNT) {
+    loadMoreButton.setAttribute("disabled", true);
+    loadMoreButton.disable = true;
+    return false;
+  }
+  loadMoreButton.removeAttribute("disabled");
+  return true;
+}
+
+function removeUnrelatedNews(reload) {
+  if (reload) {
+    const itemContainer = latestContainer;
+    itemContainer.innerHTML = "";
+    loadMoreButton.removeAttribute("disabled");
+
+    return true;
+  }
 }
